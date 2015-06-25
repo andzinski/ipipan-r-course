@@ -1,0 +1,17 @@
+{
+    "contents" : "#' @title andzinskihw6\n#'\n#' @description\n#' Advanced data analysis software development with R - Homework 6\n#'\n#' @useDynLib andzinskihw6\n#' @name andzinskihw6-package\n#' @docType package\n#' @importFrom Rcpp sourceCpp\ninvisible(NULL)",
+    "created" : 1435221289144.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2277633648",
+    "id" : "E2873521",
+    "lastKnownWriteTime" : 1435221301,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/R/andzinskihw6-package.R",
+    "project_path" : "R/andzinskihw6-package.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

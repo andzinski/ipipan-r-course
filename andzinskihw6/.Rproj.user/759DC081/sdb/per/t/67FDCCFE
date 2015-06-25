@@ -1,0 +1,17 @@
+{
+    "contents" : "\\documentclass{article}\n\n\\author{Maciej Andzinski}\n\\title{andzinskihw6 vignette}\n\n\\begin{document}\n\n\\maketitle\n\n\\large{andzinskihw6 contains solutions for homework 6 of \"Advanced data analysis software development with R\" e-learning course organised by IPI PAN. It constitutes the crowning achievement of hard work during the whole course :)}\\newline\n\\vspace{1 cm}\n\n\\tableofcontents\n\n\\vspace{0.5 cm}\n\\section{Introduction}\n%\\vspace{1 cm}\n\nPackage {\\tt andzinskihw6} is loaded by \n<<echo=TRUE,print=FALSE>>= \nlibrary(andzinskihw6)\n@\n\n\\vspace{0.5 cm}\nThis vignette demostrates a few examples of the {\\tt andzinskihw6} functions usage.\n\n\n\\section{mode() function}\n\n{\\tt mode()} function takes a numeric vector as an arguments and returns the most frequent value in given numeric vector.\n\n<<echo=TRUE,print=FALSE>>= \nmode(c(1,1,2))\n@\n\nAll {\\tt NA} values are omitted:\n<<echo=TRUE,print=FALSE>>= \nmode(c(1,1,NA,NA,2,NA,NA))\n@\n\nIf given x numeric vector contains only {\\tt NA} values, then {\\tt NA} value is returned:\n\n<<echo=TRUE,print=FALSE>>= \nmode(c(NA,NA,NA,NA))\n@\n\n\n\\section{simplify2array() function}\n\nFunction {\\tt simplify2array()} transforms given list {\\tt x} into a matrix if all elemetns of the list are of the same length. If that length equals to 1 then a numeric vector is returned instead of matrix.\n\n<<echo=TRUE,print=FALSE>>= \nsimplify2array(list(c(1,2),c(3,4)))\nsimplify2array(list(c(1),c(2)))\nsimplify2array(list(c(1,2,3)))\n@\n\nFunction {\\tt simplify2array()} mimics behaviour of {\\tt base::simplify2array()} function, however comparing to the latter its capabilities are limited. {\\tt andzinskihw6::simplify2array()} function copes well with numeric and logical values, however, unlike {\\tt base::simplify2array()} it doesn't support charater vectors. In some cases this drawback may be compensated by slightly faster execution (see: benchmark vignette).\n\n<<echo=TRUE,print=FALSE>>= \nsimplify2array(list(c(1,2),c(\"a\",\"b\")))\nbase::simplify2array(list(c(1,2),c(\"a\",\"b\")))\n@\n\n\\section{ass() function}\n\nThis function for some given integer {\\tt n} generates all possible 0-1 assignment vectors of {\\tt 2n} survey participants in such a way that exactly n of them are assigned to group 0 (control) and the other {\\tt n} ones are assigned to group 1 (treatment).\n\n<<echo=TRUE,print=FALSE>>= \nass(2)\n@\n\n\\subsection{Remark on outpus size}\n\n\\textbf{WARNING!} This function produces big output that consumes a lot of memory (see: benchmark vignette). \n\\end{document}",
+    "created" : 1435236817140.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1153972746",
+    "id" : "67FDCCFE",
+    "lastKnownWriteTime" : 1435253283,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/vignettes/andzinskihw6-package.Rnw",
+    "project_path" : "vignettes/andzinskihw6-package.Rnw",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "sweave"
+}

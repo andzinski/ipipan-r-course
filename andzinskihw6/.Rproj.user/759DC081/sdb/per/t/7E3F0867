@@ -1,0 +1,17 @@
+{
+    "contents" : "#include <Rcpp.h>\nusing namespace Rcpp;\n//' @title ass\n//' @description This function for some given integer n generates all possible 0-1 assignment vectors of 2n survey participants in such a way that exactly n of them are assigned to group 0 (control) and the other n ones are assigned to group 1 (treatment).\n//' \n//' @param n - a numeric value. Due to contrains n can't be larger than 30. \n//' @return A matrix with 2n columns and an appropriate number of rows. \n//' \n//' @export\n// [[Rcpp::export]]\nNumericMatrix ass(int n) {\n\n  if(n>30) stop(\"n is too big, I can only cope with n<=30. Sorry! \");\n\n  struct countBits {\n    // Hamming weight\n    int count(unsigned long x) {\n      x = x - ((x >> 1) & 0x55555555);\n      x = (x & 0x33333333) + ((x >> 2) & 0x33333333);\n      x = (x + (x >> 4)) & 0x0F0F0F0F;\n      x = x + (x >> 8);\n      x = x + (x >> 16);\n      return x & 0x0000003F;\n    }\n  };\n\n  countBits counter;\n\n  std::set<unsigned long> counts;\n\n  unsigned long s = pow(2,n*2);\n\n  for(unsigned long i=0; i<s; i++) {\n    if(counter.count(i) == n) {\n      counts.insert(i);\n    }\n  }\n  \n  NumericMatrix v(counts.size(),n*2);\n  int i = 0;\n  for (std::set<unsigned long>::iterator it=counts.begin(); it!=counts.end(); ++it) {\n    for(int j=0; j<(n*2); j++) {\n      v(i,j) = ((*it>>j) & 0x1);\n    }\n    i++;\n  }\n  \n  return v;\n}",
+    "created" : 1435227808452.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "583325288",
+    "id" : "7E3F0867",
+    "lastKnownWriteTime" : 1435250892,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/src/ass.cpp",
+    "project_path" : "src/ass.cpp",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "cpp"
+}

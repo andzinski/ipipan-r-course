@@ -1,0 +1,128 @@
+\documentclass{article}
+
+\author{Maciej Andzinski}
+\title{andzinskihw6 benchmark vignette}
+
+
+\begin{document}
+
+\maketitle
+
+\large{This document contains results of benchmark of the functions provided by andzinskihw6 package.}\newline
+\vspace{1 cm}
+
+\tableofcontents
+
+\vspace{0.5 cm}
+\section{Introduction}
+%\vspace{1 cm}
+
+Package {\tt andzinskihw6} is loaded by 
+<<echo=TRUE,print=FALSE>>= 
+library(andzinskihw6)
+@
+
+
+\vspace{0.5 cm}
+This vignette provides some information about performance of {\tt andzinskihw6} functions.
+
+\section{mode() function}
+
+For benchmark purposes function {\tt mode2()} was coded in plain R language. It mimics behaviour of {\tt andzinskihw6::mode()} function:
+
+<<echo=TRUE,print=FALSE>>= 
+mode2 <- function(x) {
+  which.max(table(x))
+}
+@
+
+Benchmark results are presented below:
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  mode(c(1:100000)),
+  mode2(c(1:100000)),
+  times=10
+)
+@
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  mode(c(1:10000)),
+  mode2(c(1:10000)),
+  times=100
+)
+@
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  mode(c(1:10)),
+  mode2(c(1:10)),
+  times=100
+)
+@
+
+As you can see, independently of input size function {\tt andzinskihw6::mode()} is much faster that simmilar solution in R.
+
+\section{simplify2array() function}
+
+This function provides incomplete functionality comparing to {\tt base::simplify2array}, however it results in slightly faster execution in some cases. Below you can see comparison.
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  simplify2array(list(c(1:1000),c(1:1000))),
+  base::simplify2array(list(c(1:1000),c(1:1000))),
+  times=100
+)
+@
+
+Unfortunetly, much bigger input causes significant drop in execution time: 
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  simplify2array(list(c(1:100000),c(1:100000))),
+  base::simplify2array(list(c(1:1000),c(1:1000))), 
+  times=100
+)
+@
+
+
+However, for small datasets a little gain is still observed:
+
+<<echo=TRUE,print=FALSE>>= 
+microbenchmark::microbenchmark(
+  simplify2array(list(c(1:10000))),
+  base::simplify2array(list(c(1:10000))) ,
+  times=100
+)
+@
+
+
+\section{ass() function}
+
+Below you can see number of rows produced by {\tt ass()} function for {\tt n = 1..10}.
+
+<<echo=TRUE,print=FALSE>>= 
+n <- sapply(c(1:10), function(x) { nrow(ass(x)) })
+names(n) <- c(1:10)
+as.matrix(n)
+@
+
+<<echo=TRUE,print=FALSE>>= 
+plot(n, xlab="n", ylab="nrow(ass(n))")
+@
+
+As you can see, the output grows exponentially. For {\tt n=13} number of rows exceeds 10M (output matrix size is about 2GB), so be prepared for waiting and make sure that your system is equipped with sufficient amount of memory. Due to constraints {\tt sizeof(unsigned long n)}, {\tt n}  can't be bigger than 30.
+
+<<echo=TRUE,print=FALSE>>= 
+n <- sapply(c(1:10), function(x) { object.size(ass(x)) })
+names(n) <- c(1:10)
+as.matrix(n)
+@
+
+<<echo=TRUE,print=FALSE>>= 
+plot(n, xlab="n", ylab="object.size(ass(n)) [bytes]")
+@
+
+
+\end{document}

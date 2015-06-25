@@ -1,0 +1,17 @@
+{
+    "contents" : "#include <Rcpp.h>\nusing namespace Rcpp;\n//' @title mode\n//' @description This function determines the most frequently occurring value in an integer vector (mode).\n//' \n//' @param x - a numeric vector\n//' @return Value that occurs most frequently in given numeric vector x. NA elements are ignored, if given vector x contains only NA elements then NA value will be returned.\n//' \n//' @export\n// [[Rcpp::export]]\nint mode(NumericVector x) {\n  \n  int x_size = x.size();\n  \n  if(x_size==0) {\n    stop(\"x is empty!\");\n  }\n  \n  std::map<int,int> counts;\n  int c = 0;\n  int v;\n  \n  for(int i=0; i<x_size; i++) {\n    if(!NumericVector::is_na(x[i])) {\n      counts[x[i]]++;\n    }\n  }\n  \n  if(counts.empty()) {\n    return NA_INTEGER;\n  }\n  \n  for(std::map<int,int>::iterator el=counts.begin(); el!=counts.end(); ++el) {\n    if(el->second > c) {\n      v = el->first;\n      c = el->second;\n    }\n  }\n  \n  return v;\n}",
+    "created" : 1435221511225.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2424792125",
+    "id" : "F3C61555",
+    "lastKnownWriteTime" : 1435232232,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/src/mode.cpp",
+    "project_path" : "src/mode.cpp",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "cpp"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "library(\"testthat\")\nexpect_equal(simplify2array(list(c(1),c(2),c(3))),c(1,2,3))\nexpect_equal(simplify2array(list(c(1,2,3))),matrix(c(1,2,3)))\nexpect_equal(simplify2array(list(c(1),c(2,3))),list(c(1),c(2,3)))\nexpect_equal(simplify2array(list(c(\"a\"),c(1))),list(c(\"a\"),c(1)))\nexpect_equal(simplify2array(list(c(\"a\"))),list(c(\"a\")))\nexpect_equal(simplify2array(list(c(1),c(FALSE))),c(1,0))\nexpect_equal(simplify2array(list(c(1),c(2),c(3))),c(1,2,3))\nexpect_equal(simplify2array(list(c(1),c(2),c(3))),base::simplify2array(list(c(1),c(2),c(3))))\nexpect_equal(simplify2array(list(c(1,2),c(3,4))),base::simplify2array(list(c(1,2),c(3,4))))\nexpect_equal(simplify2array(list(c(1,2,3,4),c(11,12,13,14))),base::simplify2array(list(c(1,2,3,4),c(11,12,13,14))))",
+    "created" : 1435249542110.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3314106119",
+    "id" : "9700D8F9",
+    "lastKnownWriteTime" : 1435250001,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/tests/testthat/test-simplify2array.R",
+    "project_path" : "tests/testthat/test-simplify2array.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

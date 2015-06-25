@@ -1,0 +1,17 @@
+{
+    "contents" : "library(\"testthat\")\nexpect_error(mode(c()))\nexpect_equal(mode(c(1,1,1,2)),1)\nexpect_equal(mode(c(1,1,1,2,2,2,2)),2)\nexpect_equal(mode(c(1:1000,111)),111)\nexpect_equal(mode(rep(1,100)),1)\nexpect_equal(mode(111),111)\nexpect_equal(mode(c(1,NA,NA)),1)\nexpect_true(is.na(mode(c(NA,NA,NA))))",
+    "created" : 1435221751029.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2554965591",
+    "id" : "80F56ACB",
+    "lastKnownWriteTime" : 1435224552,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/tests/testthat/test-mode.R",
+    "project_path" : "tests/testthat/test-mode.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

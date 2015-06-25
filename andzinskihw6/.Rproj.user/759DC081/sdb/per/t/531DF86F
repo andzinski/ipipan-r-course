@@ -1,0 +1,17 @@
+{
+    "contents" : "#include <Rcpp.h>\nusing namespace Rcpp;\n//' @title simplify2array\n//' @description This function tries to convert list to matrix or numeric vector.\n//' \n//' @param x - a list\n//' @return A matrix, numeric vector or a list. If it is feasible to simplify (all elements of given x list are numeric vectors of the same length) then matrix or numeric vector is returned. Otherwise function returns unchanged given list x.\n//' \n//' @export\n// [[Rcpp::export]]\nRObject simplify2array(List x) {\n\n  int nrow = x.size();\n  int row_len;\n\n  for(int i=0; i<nrow; i++) {\n    if(Rf_isNumeric(x[i])) {\n      NumericVector n(x[i]);\n      if(i==0) {\n          row_len = n.size();\n      } else {\n        if(n.size()!=row_len) {\n          return x;\n        }\n      }\n    } else {\n      return x;\n    }\n  }\n\n  if(row_len==1) {\n    NumericVector v(nrow);\n    for(int i=0; i<nrow; i++) {\n      NumericVector n(x[i]);\n      v[i] = n[0];\n    }\n    return v;\n  } else {\n    NumericMatrix v(row_len,nrow);\n    for(int i=0; i<nrow; i++) {\n      NumericVector n(x[i]);\n      for(int j=0; j<row_len; j++) {\n        v(j,i) = n[j];\n      }\n    }\n    return v;\n  }\n  \n}",
+    "created" : 1435244578756.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "999492531",
+    "id" : "531DF86F",
+    "lastKnownWriteTime" : 1435249517,
+    "path" : "~/Dokumenty/R_language/hw6/andzinskihw6/src/simplify2array.cpp",
+    "project_path" : "src/simplify2array.cpp",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "cpp"
+}

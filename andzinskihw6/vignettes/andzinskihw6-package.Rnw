@@ -1,0 +1,76 @@
+\documentclass{article}
+
+\author{Maciej Andzinski}
+\title{andzinskihw6 vignette}
+
+\begin{document}
+
+\maketitle
+
+\large{andzinskihw6 contains solutions for homework 6 of "Advanced data analysis software development with R" e-learning course organised by IPI PAN. It constitutes the crowning achievement of hard work during the whole course :)}\newline
+\vspace{1 cm}
+
+\tableofcontents
+
+\vspace{0.5 cm}
+\section{Introduction}
+%\vspace{1 cm}
+
+Package {\tt andzinskihw6} is loaded by 
+<<echo=TRUE,print=FALSE>>= 
+library(andzinskihw6)
+@
+
+\vspace{0.5 cm}
+This vignette demostrates a few examples of the {\tt andzinskihw6} functions usage.
+
+
+\section{mode() function}
+
+{\tt mode()} function takes a numeric vector as an arguments and returns the most frequent value in given numeric vector.
+
+<<echo=TRUE,print=FALSE>>= 
+mode(c(1,1,2))
+@
+
+All {\tt NA} values are omitted:
+<<echo=TRUE,print=FALSE>>= 
+mode(c(1,1,NA,NA,2,NA,NA))
+@
+
+If given x numeric vector contains only {\tt NA} values, then {\tt NA} value is returned:
+
+<<echo=TRUE,print=FALSE>>= 
+mode(c(NA,NA,NA,NA))
+@
+
+
+\section{simplify2array() function}
+
+Function {\tt simplify2array()} transforms given list {\tt x} into a matrix if all elemetns of the list are of the same length. If that length equals to 1 then a numeric vector is returned instead of matrix.
+
+<<echo=TRUE,print=FALSE>>= 
+simplify2array(list(c(1,2),c(3,4)))
+simplify2array(list(c(1),c(2)))
+simplify2array(list(c(1,2,3)))
+@
+
+Function {\tt simplify2array()} mimics behaviour of {\tt base::simplify2array()} function, however comparing to the latter its capabilities are limited. {\tt andzinskihw6::simplify2array()} function copes well with numeric and logical values, however, unlike {\tt base::simplify2array()} it doesn't support charater vectors. In some cases this drawback may be compensated by slightly faster execution (see: benchmark vignette).
+
+<<echo=TRUE,print=FALSE>>= 
+simplify2array(list(c(1,2),c("a","b")))
+base::simplify2array(list(c(1,2),c("a","b")))
+@
+
+\section{ass() function}
+
+This function for some given integer {\tt n} generates all possible 0-1 assignment vectors of {\tt 2n} survey participants in such a way that exactly n of them are assigned to group 0 (control) and the other {\tt n} ones are assigned to group 1 (treatment).
+
+<<echo=TRUE,print=FALSE>>= 
+ass(2)
+@
+
+\subsection{Remark on outpus size}
+
+\textbf{WARNING!} This function produces big output that consumes a lot of memory (see: benchmark vignette). 
+\end{document}
